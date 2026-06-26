@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20240513/MODEL/" expressionLanguage="https://www.omg.org/spec/DMN/20240513/FEEL/" namespace="https://kie.org/dmn/_4AACB41E-0D76-44FB-A820-59568B9674E1" id="_C9FC6A7B-D7F5-4E62-90EE-317D2881D3C5" name="New Decision Table" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0">
+  <decision id="_F621EE73-D2D7-4386-BF79-8CE698763D81" name="Decision-1">
+    <variable id="_7E00DC50-57AC-41D7-ADDE-D814B3631B0A" name="Decision-1" />
+    <decisionTable id="_776AF99C-E3F0-4D42-A117-AA4D2C52E7A8" hitPolicy="UNIQUE" outputLabel="Decision-1" label="Decision-1">
+      <output id="_1BB5907E-31BE-4B43-80EF-C96200889650" label="Decision-1" />
+      <annotation name="Annotations" />
+      <rule id="_B47D5E75-F5CB-4D13-843F-5D0670A2897F">
+        <outputEntry id="_C83659F8-F5E5-4FB2-AD06-7B880917A00D">
+          <text>1</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
