@@ -1,0 +1,1357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dmn:definitions xmlns:dmn="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns="https://kie.apache.org/dmn/_acute_sinusitis" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:feel="https://www.omg.org/spec/DMN/20230324/FEEL/" id="_65C4BA67-F8C1-4B0E-B29D-BB05FBEA954C" name="DMCommunity Challenge" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.apache.org/dmn/_acute_sinusitis">
+  <dmn:extensionElements />
+  <dmn:itemDefinition id="_EF6597B7-E959-4D07-BE0C-8C81AFD1AD46" name="tConflict" isCollection="false">
+    <dmn:itemComponent id="_EEAC6906-9629-4302-AB5F-F7DF7FA4F600" name="Medication1" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_6574A618-7178-46AB-B87A-5A49493943DC" name="Medication2" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_A1308872-6EB3-4075-841C-679A8A2ADD7F" name="Interaction" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FF7106AF-3929-4A54-B27B-CC3D209B2927" name="Risk" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_0914C62F-CD83-4140-BBD6-4898607A2CF4" name="tWarning" isCollection="false">
+    <dmn:itemComponent id="_74BB5F9E-57DA-43B6-856B-7300E130FE9C" name="ConflictingDrug" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_905ACBD4-4497-4A6C-A905-3CE7E45FAFC3" name="Interaction" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_DAA451C9-CEE6-4690-9329-FCF8D1ECF9A0" name="Risk" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:decision id="_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89" name="Creatinine Clearance">
+    <dmn:extensionElements />
+    <dmn:variable id="_AE84EC02-E4FF-49E5-B9C3-D2024224BE4D" name="Creatinine Clearance" typeRef="number" />
+    <dmn:informationRequirement id="_C263D11C-3FF6-4FFE-B89E-3F6BAE43D4AB">
+      <dmn:requiredInput href="#_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_531CD5D7-EF43-4A46-8A78-3AC7CB1EEF3E">
+      <dmn:requiredInput href="#_1AA2C0DE-962D-4EF9-A9E6-959CFCB09D0E" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_38A67614-097E-4284-ABE6-285CF81915CF">
+      <dmn:requiredInput href="#_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" />
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_DA5884B8-3B71-484F-97C3-8BDD8856CF11">
+      <dmn:text>decimal(((140 - Age) * Weight) / (Creatinine Level * 72), 2)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" name="Medication">
+    <dmn:extensionElements />
+    <dmn:variable id="_F9F27034-02BA-4811-A68C-2FEAD1D4ACB1" name="Medication" typeRef="string" />
+    <dmn:informationRequirement id="_A3EC2FC1-8C7B-44D8-A971-E96F6158D251">
+      <dmn:requiredInput href="#_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_4286A113-B12E-42E8-B053-43ECE3F7F26A">
+      <dmn:requiredInput href="#_65695F8B-25D4-4E75-BEA6-E0303856F04B" />
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_9BDC281E-A461-4A7C-AECA-0F99A772FA05" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_3F1E7B71-217A-4F0B-B365-455433E98B25">
+        <dmn:inputExpression id="_B7C7B4E5-B982-4B35-B433-AE293E9BCD30" typeRef="boolean">
+          <dmn:text>Is Penicillin Allergic</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_E55F8E65-76D0-4BE0-AAA1-DF3F1C772889">
+        <dmn:inputExpression id="_44261C60-8536-43A9-9A98-DCEA631BE753" typeRef="number">
+          <dmn:text>Age</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_FC2040BC-8BF5-4F07-93D5-6B2AF8604DA9" name="Medication" typeRef="string" />
+      <dmn:annotation name="Annotations" />
+      <dmn:rule id="_40EBCA78-D5B3-4BF0-821F-E16F8F967770">
+        <dmn:inputEntry id="_E82F664F-5F8E-4E7C-98F3-B7200509A4E6">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6F730A0F-E3C6-4624-AF61-C7F5F13E484A">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D56B366D-B948-48AF-B548-109AAA419FCC">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_61F7D2AA-A57B-4B02-99A5-DD1B7C2FA3D3">
+        <dmn:inputEntry id="_EECCCE68-7F10-4CFC-9D04-18D00F53A3F8">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5257A79D-B24F-40CC-85CB-65872E0B6D8A">
+          <dmn:text>&gt;= 18</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D2F4FEA6-CE2B-48AB-9C31-D0631C3D0397">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B4315FF8-5510-4BF5-BA2E-B637413A3FAD">
+        <dmn:inputEntry id="_D0CC48DB-BD12-4534-B1D1-FBC76E0DD7DB">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_697F29AF-1838-4159-B049-3CF0948D264F">
+          <dmn:text>&lt; 18</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_CE5B3482-3AE1-4F30-B04C-F13384B5E8F2">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9" name="Dosing">
+    <dmn:extensionElements />
+    <dmn:variable id="_953641CF-3025-4827-8FBD-0B03830141CE" name="Dosing" typeRef="string" />
+    <dmn:informationRequirement id="_E2499A09-06BC-4300-A5B1-78ED11A228F4">
+      <dmn:requiredInput href="#_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_92617A03-D70B-4441-AAFB-C4FB743C6640">
+      <dmn:requiredInput href="#_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_8895F11E-C8D5-407E-8977-D3F81720E296">
+      <dmn:requiredDecision href="#_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89" />
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_3DED7721-F1AA-4187-977B-48304EC3682B" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_676B892A-AAF9-400F-9A7B-D653BB92B5EA">
+        <dmn:inputExpression id="_1C0C198B-D649-4294-830B-972B8D3320F2" typeRef="number">
+          <dmn:text>Creatinine Level</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_CDAD1583-9E75-4D8E-9EC2-D53389204B69">
+        <dmn:inputExpression id="_B01E630B-4044-4F7E-BDE7-07D259BCD72E" typeRef="number">
+          <dmn:text>Creatinine Clearance</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_22A2FB2F-5F75-4CAC-9374-4489ACC54E65">
+        <dmn:inputExpression id="_AC92221D-B29D-4F1C-918F-5257B909F87E" typeRef="number">
+          <dmn:text>Age</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_A46A4DE4-18A1-4C02-A086-4A014AF7F706" name="Dosing" typeRef="string" />
+      <dmn:annotation name="Annotations" />
+      <dmn:rule id="_133B7A76-1D9B-4C9B-936A-465ADEF835A5">
+        <dmn:inputEntry id="_C32C2481-4A17-48A9-8431-A59FD06D5BF5">
+          <dmn:text>&gt; 1.4</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_42BA01CC-1584-4F74-A74D-D6B0334027CA">
+          <dmn:text>&lt; 50</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E931D865-3BCD-48B6-ABB2-63F7D45B7A53">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_393E2734-D9FC-4AD7-922D-48073F896132">
+          <dmn:text>&quot;200 mg every 24 hours for 14 days&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0856D662-B25B-4879-B48F-781DED11D379">
+        <dmn:inputEntry id="_0047A30B-60C6-44D9-B89B-422C233DC6A1">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4C7A72E3-14A8-4C7D-BABA-B8FBB7F68FA9">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_693933F7-D4D6-4BB5-A89E-8DE1DD9A0666">
+          <dmn:text>[15..60]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_5CAA8A9C-B84C-42A5-8F8A-7ADA6799EED2">
+          <dmn:text>&quot;500 mg every 24 hours for 14 days&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0E42CE37-35B4-428F-AFEF-CE27B39A5369">
+        <dmn:inputEntry id="_B4C0FDDD-55C3-4E9F-9A0D-8956DFEB1AEE">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_892F02E9-FEFE-4E0E-BA60-4C569A6B2D55">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_41ED5126-6903-4F18-9B21-F3542C9A2407">
+          <dmn:text>&lt; 15</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FB303721-0D02-4DC1-8A8C-49B827B5CE20">
+          <dmn:text>&quot;200 mg every 24 hours for 14 days&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_39345EBC-EE98-469B-848A-26B8B4D9AABC">
+        <dmn:inputEntry id="_D5B6132C-BBB4-4877-8FA2-7FB30BC49FC3">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_C035B50E-7237-41B8-8DBE-ED04DD49EFDC">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_01431C49-F9C1-4346-8266-D15D2F869C9D">
+          <dmn:text>&gt; 60</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AB14FB8D-0870-40DB-B1DF-962DA7C6E8A7">
+          <dmn:text>&quot;200 mg every 24 hours for 14 days&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_7A6BC865-0AD0-47BB-8813-FD2703251274" name="Conflicting Medications">
+    <dmn:extensionElements />
+    <dmn:variable id="_3073DEA8-1A73-4337-AFF5-6900967903BD" name="Conflicting Medications" typeRef="Any" />
+    <dmn:informationRequirement id="_22004E9E-26E2-442C-B41F-B8E7393DE93A">
+      <dmn:requiredDecision href="#_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" />
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_030D62C0-F1A9-4545-AF64-E661AA315882" hitPolicy="COLLECT" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_201AC0CD-9A45-4B15-A574-3B20DBF3A6A9">
+        <dmn:inputExpression id="_5AFCECC3-3462-496E-97D8-D68A18CF6190" typeRef="string">
+          <dmn:text>Medication</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_B80D4963-91FA-467C-9B92-9454378746B4" name="Medication1" typeRef="string" />
+      <dmn:output id="_C1C59289-F272-48E0-89F1-9B019C8012E5" name="Medication2" typeRef="string" />
+      <dmn:output id="_073FC87F-A028-46EE-A8D1-D4D4D2565EA8" name="Interaction" typeRef="string" />
+      <dmn:output id="_32F2CBFE-DC77-4FE0-9F78-A3F1BAB272B3" name="Risk" typeRef="string" />
+      <dmn:annotation name="Annotations" />
+      <dmn:rule id="_D02EEB2F-D62F-4468-94E0-A3ED529ED83B">
+        <dmn:inputEntry id="_1B72F5B7-EAAC-44C4-B35A-48AF96FA2224">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9B9A1D58-23C4-45F2-BCC2-632BF76A50E8">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F439D1E7-5001-4FF9-A8D0-677FCA147B40">
+          <dmn:text>&quot;Coumadin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_7C42933B-A7C3-47D5-A1C4-EFF6DD6568C8">
+          <dmn:text>&quot;Increases anticoagulant effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4C9B6827-F423-4C41-AFF6-DE8B3B370606">
+          <dmn:text>&quot;Elevated bleeding risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_4B49A36D-F770-4FE7-AB5A-19CEAC6952A7">
+        <dmn:inputEntry id="_28E94BFD-9D12-4758-8D46-C45ADC9CDE74">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_013B8722-501A-45A6-8C13-CF4C2937603B">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3B138088-8B8B-4AED-BC57-91EEA20ADD45">
+          <dmn:text>&quot;Antacids (aluminum, magnesium)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_7EFD0657-B311-4732-9590-2DF9CE0E1B27">
+          <dmn:text>&quot;Reduces levofloxacin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_128F74B5-86B2-43DB-A2F8-6F74EB654A8F">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_899AC643-8775-43CE-AAF3-509EF5635225">
+        <dmn:inputEntry id="_AAA58868-BCFE-4577-B2D8-8FC3B49349F9">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_3DEEAF49-3B6D-4026-BC5B-5AADCACC4DEB">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9FBAB364-7A95-4151-A3C5-523348DF60E5">
+          <dmn:text>&quot;Calcium supplements&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_C7DDE400-97F1-47C2-9883-BA7483169A5A">
+          <dmn:text>&quot;Reduces levofloxacin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_CEE21E4E-476C-4FF0-A446-8A2B6F624A10">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_3EEDB88B-D796-44C6-B0F7-B75366EEDB51">
+        <dmn:inputEntry id="_A1F3608C-9251-4B35-B240-1F4454F31589">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2FF855E2-6848-4809-843A-21B4880CA194">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5FC4D40B-3A68-4AFB-9D5B-8AFC75934EF7">
+          <dmn:text>&quot;Iron supplements&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_006FC594-F9A0-4359-9CA7-D2EF4AE77635">
+          <dmn:text>&quot;Reduces levofloxacin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_27134C55-30BD-476C-A097-E6AB304300C6">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_1DFF6884-21DF-4A52-84C8-21C2B94C3431">
+        <dmn:inputEntry id="_27D345D5-A6C7-460F-90B7-9F07958537FC">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2523B00C-FA96-4D89-A84A-24A773573610">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_19C9B829-A642-4DE9-ACAE-DD5ABC7F9873">
+          <dmn:text>&quot;Zinc supplements&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_94AF57FB-51AF-4CE1-9E24-5FF22D279033">
+          <dmn:text>&quot;Reduces levofloxacin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5B942DF5-600D-48D5-A09D-7923255454FC">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_EB97A0B5-3BB9-4ACE-86BD-D75EEBC81C6A">
+        <dmn:inputEntry id="_EEBD3D2E-2581-41A9-953E-4731F745B4CC">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_F94EE0F0-0532-40BC-930A-C82A5C2B9462">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_D1407048-2B05-462D-A3B7-2FB38FEB243B">
+          <dmn:text>&quot;NSAIDs (ibuprofen, naproxen)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_6DD4B8BF-2359-41E8-BC37-52EBDA8E67DC">
+          <dmn:text>&quot;Increases CNS stimulation&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3A553542-AB42-4F0A-AF8C-380F9F95A0E0">
+          <dmn:text>&quot;Seizure risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5ED39B69-033A-4AD1-AB97-9F6DEB6FBCE4">
+        <dmn:inputEntry id="_DEAB9F49-2B2B-4B51-9F1E-8A40A0011ECF">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C26F94CE-D35B-423B-8C51-0C80F8FA00E8">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0DD4B940-5CD5-4FA7-BF7B-C34A80F23286">
+          <dmn:text>&quot;Antidiabetic drugs (insulin, glipizide)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_B7472140-2EFE-4F15-B2E8-64B199A9A3E4">
+          <dmn:text>&quot;Disrupts blood sugar regulation&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4E2B6CB6-DCAC-46A5-A663-B5805E871D64">
+          <dmn:text>&quot;Hypoglycemia or hyperglycemia&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C6BE8DC9-5FB9-4789-98BC-33090A53F186">
+        <dmn:inputEntry id="_14E09E92-CDFE-43DA-8CF6-27CBA7FE32F6">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_3AC02054-A0B1-40A2-8BF1-5BB19FD9C448">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A05EBA8D-CF39-4AF0-994B-97B7CF69BBFB">
+          <dmn:text>&quot;Antiarrhythmics (amiodarone, sotalol)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_358E61E3-049A-4677-ADBC-F89888DDAA69">
+          <dmn:text>&quot;Prolongs QT interval&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_EA979AD2-EBBC-42DD-9063-78A5492A9E65">
+          <dmn:text>&quot;Serious cardiac arrhythmia&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7DFA43D1-ADED-4140-9BCE-845B186EADEE">
+        <dmn:inputEntry id="_B9CF7866-CA0B-44C3-856A-E6E36EF4CA1C">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C12D01CB-08DC-41D0-9185-B522C8A320BF">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_D1AE4313-CD1A-47DB-8C08-11D93C715A02">
+          <dmn:text>&quot;Antipsychotics (haloperidol, quetiapine)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_FF2DD9FA-DEA0-403D-B4CD-66643069FB71">
+          <dmn:text>&quot;Prolongs QT interval&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_FC973E81-101F-49FF-92A7-8BBC24578D70">
+          <dmn:text>&quot;Serious cardiac arrhythmia&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_314475CC-BDDE-428D-9FD5-0F6B810F12A3">
+        <dmn:inputEntry id="_8A21BD0F-F976-4BB7-8027-CFC6FBEAA533">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_479A8934-EE7A-44B6-8A17-301BA11A7A90">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_94609399-1C6F-4A9A-96C8-C43347D9CE8C">
+          <dmn:text>&quot;Antidepressants (tricyclics, SSRIs)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_62253EED-966C-4245-96C9-5BCD6AEC1848">
+          <dmn:text>&quot;Prolongs QT interval&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A2CA5B12-40D7-4A58-9B1F-2F97264CFBA3">
+          <dmn:text>&quot;Serious cardiac arrhythmia&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_530BB502-1C21-4B89-8B15-A2E6A41C3B2D">
+        <dmn:inputEntry id="_58D696A2-B157-4745-83F0-47A3B78C756B">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_59436ACC-E5BC-4FC0-97B4-A75DE88D41DE">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A49E83C1-A955-49C9-ACC7-E2417C0D4D4A">
+          <dmn:text>&quot;Corticosteroids (prednisone)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0D47C8F2-14DC-4E1F-AD46-3EA04123AD8A">
+          <dmn:text>&quot;Increases tendon stress&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4ECDEB45-7D6E-4918-ABBE-7FCF4FF6D02D">
+          <dmn:text>&quot;Tendon rupture risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A01555BA-CA5F-4C5D-8645-0E2896968E23">
+        <dmn:inputEntry id="_EEEF7FDB-8E72-405B-87E1-5E0BD6D86C37">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_609AB225-9C39-4D92-9965-692A550B31B1">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_8F04250C-9CDA-4CA0-A610-E079FD7196E0">
+          <dmn:text>&quot;Cyclosporine&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A6B0AC49-09DB-4DE5-8056-6CDE1A3799AC">
+          <dmn:text>&quot;Increases cyclosporine toxicity&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F832C8CE-AF9E-4D65-8D80-285735F20687">
+          <dmn:text>&quot;Kidney damage risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_8DA71B86-5F02-455F-B035-6E07E9F41444">
+        <dmn:inputEntry id="_B1A128FB-5DC9-4B53-80D6-ABD5D16C8CF8">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_101B9F48-7B03-4DBE-B7A3-A5F5D1C89373">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0CBD34D7-C46A-449D-88C2-32F450CBF43A">
+          <dmn:text>&quot;Theophylline&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0E6111F9-ACA9-47EE-8CBB-A8843A64FCDD">
+          <dmn:text>&quot;Raises theophylline levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_CCF4423A-DB69-4714-A1BC-3E9D18E6BF80">
+          <dmn:text>&quot;Toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9846DE61-3DCE-4AA9-A26B-BC75A36F706C">
+        <dmn:inputEntry id="_100CFF05-62ED-4D69-9CE5-AF48317F1D89">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_999AFC8E-0421-44BB-BF6C-E4F48F6ED874">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_27222AE8-4F8A-4AF6-886D-E0692774409B">
+          <dmn:text>&quot;Probenecid&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_DBF4281E-01F4-4569-835A-0E207A4D299C">
+          <dmn:text>&quot;Reduces levofloxacin clearance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3EB91AD6-0DD2-4C07-AD4A-441ED313E760">
+          <dmn:text>&quot;Increased levofloxacin toxicity&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_D08A991A-7BE1-4B98-BBC4-22148976E3AB">
+        <dmn:inputEntry id="_1868CB8D-246A-45B6-941A-A5003B8ECE83">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_50B9D8F7-6667-4B53-89AC-71BF06A0A534">
+          <dmn:text>&quot;Levofloxacin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9540003D-1C2A-4683-AAAA-0FB07780D52B">
+          <dmn:text>&quot;Sucralfate&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4247C429-E6DD-4522-9458-FEF79E0CB3A9">
+          <dmn:text>&quot;Reduces levofloxacin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_63707169-6879-4FA7-B1D8-5746E423BBD5">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_79B5ED79-90FD-4AA9-B033-5AF928FBBDA6">
+        <dmn:inputEntry id="_ADE72A4C-AA05-407A-AE8E-164617CA4445">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B4EA8DA1-2188-4F22-B757-80BE86A216AA">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_332E88D3-5D19-45E7-8ABC-BFEEDC2F5332">
+          <dmn:text>&quot;Methotrexate&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0484487B-A88C-4F0A-B9EA-1EDEF5F54486">
+          <dmn:text>&quot;Reduces methotrexate clearance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5CD0028D-8A5A-4F69-A9B8-EA11B1281280">
+          <dmn:text>&quot;Methotrexate toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2222C92A-D6D5-446D-AA10-98CE01F1BC20">
+        <dmn:inputEntry id="_2B7323E1-104E-442F-9E78-76B6E4CDF749">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_DBF3C9B1-146D-429C-ACB7-CFC97A126D0C">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F81BA69D-989C-45D9-9D1B-9DB73AB325CC">
+          <dmn:text>&quot;Allopurinol (gout medication)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_30EA608E-7E34-4FB0-AD8E-F7B72C4A3204">
+          <dmn:text>&quot;Increases allergic reaction risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_67CA37A2-F62C-44E2-B04F-9D4BE75FB0A1">
+          <dmn:text>&quot;Skin rash, hypersensitivity&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A426EAEE-98D4-488C-9A36-9B260455C8FF">
+        <dmn:inputEntry id="_76CC298B-0223-4892-8829-EA387E4BE4E3">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_63DC4A81-EE8A-43BC-A9BC-8E07C917CB70">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_C79ECC48-3787-42B2-8E6D-0D091D26347F">
+          <dmn:text>&quot;Probenecid&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_1DBB1B70-5F94-4708-9258-AEC907211682">
+          <dmn:text>&quot;Reduces amoxicillin clearance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_B2B55CED-9238-4256-85D1-0D15643325F1">
+          <dmn:text>&quot;Increased amoxicillin levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9DE85848-8AD6-4197-A427-446363C3EC41">
+        <dmn:inputEntry id="_9ADB0591-015F-4570-ADF4-F35DA311F46D">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C688E1AC-F49A-4226-A5BC-DA5A090C9CE9">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_6521B89B-7D82-4193-AD5B-20473945A60B">
+          <dmn:text>&quot;Tetracycline antibiotics&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_84F5AC1D-4E81-4F38-8BEC-0B400889F243">
+          <dmn:text>&quot;Reduces amoxicillin effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3587D7AA-D499-4629-BF76-254A1C2E96AD">
+          <dmn:text>&quot;Reduced antibiotic effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F8B0386C-B66A-415F-AF63-B05CC58300DA">
+        <dmn:inputEntry id="_0A0DBF59-5519-48FA-8E73-0344C7911866">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2C0665B0-7245-437E-A62B-88C80E496159">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9CCE0E00-FFA7-4BD1-B953-0EDE387FEDB2">
+          <dmn:text>&quot;Chloramphenicol&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_94D7E1EE-B129-44C5-B29A-0367E671BBB2">
+          <dmn:text>&quot;Reduces amoxicillin effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_FD5BF1F5-3073-4D08-A1AE-BC548C097D83">
+          <dmn:text>&quot;Reduced antibiotic effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_3ED6EAC1-4A50-4087-AAAA-B74F4A7C7159">
+        <dmn:inputEntry id="_CDC65DC7-37EB-48DE-A29F-98B615AB7FA2">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0A51E460-F021-4751-B1AB-4F40357E7538">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_D7C1D860-E6A2-4414-B14A-7D299D681EFF">
+          <dmn:text>&quot;Erythromycin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_E7295DBE-5323-4450-BD9C-48A9250DA002">
+          <dmn:text>&quot;Reduces amoxicillin effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_D7369053-02FC-47C5-9330-4642F59DF680">
+          <dmn:text>&quot;Reduced antibiotic effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_AF75C3B3-CB0A-407D-992B-3CD6DFD53D8F">
+        <dmn:inputEntry id="_E2D8B65E-951B-4615-A00E-8E89861657AE">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_95E57E9A-162A-4F18-9AA3-096331846754">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_28CDFE7C-6792-4CC5-8642-ECA791E23018">
+          <dmn:text>&quot;Oral contraceptives&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_72D5B29D-7056-4E9B-89EE-ED6A2BC6AD68">
+          <dmn:text>&quot;Disrupts gut bacteria balance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_72C19F0E-0BA7-4E8C-8486-7C2764D0ED45">
+          <dmn:text>&quot;Reduced contraceptive effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_22F19D30-6E7F-4C6E-A9A2-02EB49D9B7A7">
+        <dmn:inputEntry id="_8A1C5A8A-737F-47E3-9201-67D2F4C2EB66">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B3A5784F-B660-4283-AC0E-3D194B166584">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4CE1823B-4C69-4838-BE51-C342051A26D8">
+          <dmn:text>&quot;Live bacterial vaccines (typhoid)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_CE4655AD-39EF-4A1A-A65A-32F91E4F7AA7">
+          <dmn:text>&quot;Interferes with vaccine mechanism&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_1473603E-BF6E-4813-BA73-B9B57CB4CF59">
+          <dmn:text>&quot;Reduced vaccine effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B720C054-F225-449C-A1EC-445766003938">
+        <dmn:inputEntry id="_B4A823B6-2D2B-4A04-B260-1B742E54C8D1">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E44C5D8B-560B-41A2-BF5C-1C6DFB66B3EE">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4F0DAB1B-407F-4365-91A7-990FEBFBCA86">
+          <dmn:text>&quot;Antacids (high doses)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_31EEF68A-D520-4680-8CD0-6610713254C9">
+          <dmn:text>&quot;Reduces amoxicillin absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_B62AB3DC-56CC-486E-8EC4-6D1AB5960A75">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2F2DA60F-8966-4A84-AC00-E298908B1FDE">
+        <dmn:inputEntry id="_0E54EC01-8556-4B40-921F-0567AC011B07">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_562E8089-B9E7-4572-985A-73689EE39367">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_BF98C2A3-D614-4207-AF4D-3DBA13B83B67">
+          <dmn:text>&quot;Mycophenolate (immunosuppressant)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_57941857-D273-4478-B97B-AF1DD4569F23">
+          <dmn:text>&quot;Reduces mycophenolate absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_ED586513-7E73-46C9-881F-3A3E2B8F73A0">
+          <dmn:text>&quot;Reduced immunosuppressant effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9A937B5E-537B-4A93-8722-D6C0C6AB06C2">
+        <dmn:inputEntry id="_E0CD34BA-C6C2-47E5-9933-158296A21F70">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0073D99E-5E3F-4C6E-9DCD-3A9388742CB2">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_7D88D9BD-7F40-4EF4-AEEF-B571880F2719">
+          <dmn:text>&quot;Lithium&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_B5786397-45CD-4361-AC4A-4024509066ED">
+          <dmn:text>&quot;Raises lithium levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9F695B63-3436-4FBE-9B3B-2103344D86D9">
+          <dmn:text>&quot;Lithium toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B994CEFE-FC28-4CD9-82D5-8E6911AFE17C">
+        <dmn:inputEntry id="_EAD34006-AFC7-4163-AB40-E027145D3E4E">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_EEF2E035-FF7E-4DDD-A74D-1550DB830E5A">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_DAC9E3AB-CFD3-49E5-A47E-5E70ED0B37F1">
+          <dmn:text>&quot;NSAIDs (ibuprofen, naproxen)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_310ADDC1-2E05-4403-B8EB-37496839CE35">
+          <dmn:text>&quot;Increases amoxicillin levels slightly&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_7FD31911-C64B-4E3C-B077-0EEB17EA21CE">
+          <dmn:text>&quot;Mild toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_549C1C0E-7015-46A6-8785-739BBAC05B93">
+        <dmn:inputEntry id="_9E26F289-E4C1-411C-AB6A-248DF767F238">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0FD0089A-9576-4D79-AED9-48DF6E324849">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_B6F474E0-A9C2-4345-B39A-76C2A657C312">
+          <dmn:text>&quot;Digoxin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_61E393F5-1055-4E18-8EB2-AAF951281B97">
+          <dmn:text>&quot;Raises digoxin levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5A4C3488-024F-4246-8A99-3C57A3CE84F0">
+          <dmn:text>&quot;Digoxin toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_76D83A03-2CB8-4391-B424-4D3686A4861B">
+        <dmn:inputEntry id="_BC26F8BF-9654-4635-BE87-664CE64302B1">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8008DFA1-3BC7-4786-99D8-7EDB3D4C9071">
+          <dmn:text>&quot;Amoxicillin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_46EBFE0F-BE83-48F8-8184-75DB8984CB09">
+          <dmn:text>&quot;Sulfonamides&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_00B8391D-6ACC-47F3-BB61-4822186C9747">
+          <dmn:text>&quot;Reduces amoxicillin effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_38AFDB6D-F3BE-4CCE-AA4A-A1FE402C964A">
+          <dmn:text>&quot;Reduced antibiotic effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_3C912CFC-4A07-4969-8935-61FCB906DCB9">
+        <dmn:inputEntry id="_A17E10D8-7543-424E-B053-3AB89637D772">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_811F0E34-599E-4061-ACE3-20B6A9CEC1D4">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F7AD21A9-09CD-45B2-AB4C-C6FD628F1153">
+          <dmn:text>&quot;Coumadin&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_EF00CB68-E1A0-41FF-AE49-9797AA8CFE7B">
+          <dmn:text>&quot;Increases anticoagulant effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_FC00D952-170F-43F8-8308-D67835C050EA">
+          <dmn:text>&quot;Elevated bleeding risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C4FB6FB0-71A1-4609-9FB0-76A92EFAF072">
+        <dmn:inputEntry id="_964872BD-518A-4CF3-92FC-EB75388B35DC">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_492A7B7A-DAAB-4C4A-8622-0E78F87772C2">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_BDA4C64F-FD6D-4C4C-9304-BD192305F44F">
+          <dmn:text>&quot;Probenecid&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0B48E5A1-A9C6-40E7-A6FF-988A8F972718">
+          <dmn:text>&quot;Reduces cefuroxime clearance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A147154D-60A7-4136-9F5E-06D1CEAB8036">
+          <dmn:text>&quot;Increased cefuroxime levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5E6F497E-B48E-4716-8DD1-0EA5B87A6504">
+        <dmn:inputEntry id="_FF9F9DE8-9249-4474-96C8-EFD4C4FCF018">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_EF94C58C-4635-4A67-B50A-A248003C0652">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_BB0C146F-AEFF-4F6C-8101-22281878FA68">
+          <dmn:text>&quot;Antacids (aluminum, magnesium)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_18527323-AE2D-4B8F-B514-A57ED668867A">
+          <dmn:text>&quot;Reduces cefuroxime absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_EDA57EE4-0E62-43EC-BEBE-1CB59E1FFB1B">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_95B02DBF-6765-4FE8-9BD1-27A73FBE7C21">
+        <dmn:inputEntry id="_6AD13BC7-91B6-4203-B7FC-34BE0B0239F8">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2BD24AD0-F38B-4303-AFDC-39BD59A96901">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_E3ACF5FC-50E0-46C6-8279-3BC08FBDB2A5">
+          <dmn:text>&quot;H2 blockers (ranitidine, famotidine)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4251A487-FF62-4CCF-A124-103D24A25B61">
+          <dmn:text>&quot;Reduces cefuroxime absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_D7EA8A77-6645-4F0A-B0A7-0CE14ADBF1F8">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0576B539-7FBA-4DBD-9305-B5C210946584">
+        <dmn:inputEntry id="_D1E6FB19-3D99-4557-AC0D-410A3ACF1550">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9E422342-7E10-424D-95B4-4D4340EE2A71">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4FE78C66-27CF-43A6-9BFA-3AF739E972FD">
+          <dmn:text>&quot;Proton pump inhibitors (omeprazole)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_771D9BEE-C707-413F-ADA3-19D0CC2724D1">
+          <dmn:text>&quot;Reduces cefuroxime absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_61674196-09D9-4C10-84ED-FED034560030">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F5AA1DDB-50AC-4BCE-AD2C-4F2D608CB6FC">
+        <dmn:inputEntry id="_4AE3E687-87BB-4C5D-AF41-644861EE1811">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_4E9B8436-73D4-414B-A14A-648CFF46D1B4">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_BC367F2D-DCC1-43BF-960F-AB771040E79B">
+          <dmn:text>&quot;Aminoglycosides (gentamicin)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A2185CFF-3384-4DF0-9160-E118D84CE8B8">
+          <dmn:text>&quot;Increases kidney stress&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_A261836A-F02B-484F-8CE6-897B52E811A9">
+          <dmn:text>&quot;Kidney damage risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_440E751F-5BC2-4F0F-8C10-17B46ABBD868">
+        <dmn:inputEntry id="_F3B0E5D5-19A4-44E9-8A1E-223301B59985">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6EB34D70-4C4A-4B52-A2AE-6E6A2BBD3A94">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5CA0AEDA-14F0-47A9-85CA-6FD7695827EC">
+          <dmn:text>&quot;Loop diuretics (furosemide)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_75060D7D-3093-4E98-945D-663AAE5A3CC9">
+          <dmn:text>&quot;Increases kidney stress&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F189F9F0-1303-435C-8F1B-9335BF6C6CCB">
+          <dmn:text>&quot;Kidney damage risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F4801F96-A0DF-49AD-B267-08B079DE8C5E">
+        <dmn:inputEntry id="_55FD2F9A-E510-41A5-A64C-FFD1EB9523CB">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_CB85979C-5DC8-4F53-8ABC-AE750FAC8982">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_8DA34012-420C-42DA-BA60-40187104A2FA">
+          <dmn:text>&quot;Methotrexate&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_CBF2E6E1-A2EA-491E-8EB5-8F3E094874D3">
+          <dmn:text>&quot;Reduces methotrexate clearance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_278CCF90-0664-4EB1-9DE8-424594EBCD32">
+          <dmn:text>&quot;Methotrexate toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_58321C13-767C-4C3D-8570-4AB78E54AF35">
+        <dmn:inputEntry id="_B4D7691C-2DE8-47B3-8E90-20581BCAB6C0">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E666DE8A-11E3-40AA-92B7-B593D4DDB7F9">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_77E7BA1D-8683-4C8D-85F4-23355BBDD340">
+          <dmn:text>&quot;Oral contraceptives&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_E5CFFC64-454C-4E2D-B645-1F6373454140">
+          <dmn:text>&quot;Disrupts gut bacteria balance&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3A734CAC-63FD-482F-BC03-5C6736C4BEF3">
+          <dmn:text>&quot;Reduced contraceptive effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_7143C337-FD71-49E1-A23A-446CCB61D439">
+        <dmn:inputEntry id="_D705E596-DACD-4185-8F0D-A82BBD51782F">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FD6D415E-E612-4475-8F50-A63CB858D80B">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_39822F5A-E1FB-4346-9C5D-D3414C967719">
+          <dmn:text>&quot;Live bacterial vaccines (typhoid)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_0C04F29B-D835-4296-9C79-1F710D64E6A4">
+          <dmn:text>&quot;Interferes with vaccine mechanism&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9FCE8A14-0F90-4B73-91D7-8FE1E413195E">
+          <dmn:text>&quot;Reduced vaccine effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5D536AC5-326F-44DD-B8C2-2078CBBDC96B">
+        <dmn:inputEntry id="_A03ED7E4-AA77-4570-814B-06EC14A5CE78">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_850732F8-8F27-4AD3-BFDB-79C374F66F00">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_83FE7A1A-C419-4672-B84D-12778185AFE4">
+          <dmn:text>&quot;Cyclosporine&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_4F389607-0371-4791-8915-793F080B8A19">
+          <dmn:text>&quot;Increases kidney stress&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_3EC21597-DAC3-41F3-B163-F1C2761B6B0E">
+          <dmn:text>&quot;Kidney damage risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_3F92044E-9AEB-4576-A16C-AAD715CF9250">
+        <dmn:inputEntry id="_E1D3B519-5BC4-4DBD-9EA8-07767F4C818F">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C7BAAA49-DFFF-4BC7-9891-C52426E26251">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_6EDB843D-93AD-42D5-82D5-5AADD33B8342">
+          <dmn:text>&quot;Cholestyramine&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_7D7FC614-3CCB-49AE-BC94-1F286C78A9F1">
+          <dmn:text>&quot;Reduces cefuroxime absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_6A017186-D686-41FB-B0F6-9A740E4F5154">
+          <dmn:text>&quot;Reduced antibiotic effectiveness&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_454E5378-0969-465F-8B40-04D9F7D60FC8">
+        <dmn:inputEntry id="_4BDD8EF3-E71E-47EA-95C3-9372E0D9542D">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_72552D3A-DFA5-4597-94AE-D9ADE0C416CC">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_1BAB4381-175C-4256-B1F8-24071ED65A7E">
+          <dmn:text>&quot;Mycophenolate (immunosuppressant)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_AC73D27B-4BA9-472A-AB13-7CBB3DB027F7">
+          <dmn:text>&quot;Reduces mycophenolate absorption&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_478F46D8-4CFB-43EF-92F0-805CB7B78302">
+          <dmn:text>&quot;Reduced immunosuppressant effect&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E6532BB8-94F4-4369-A251-E6700AB512FD">
+        <dmn:inputEntry id="_8AC7E027-57EF-4E2C-B7B5-5E4804F86FBE">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_642D0C46-76AC-44EE-A27E-381BE8DF7003">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9837A2D3-6581-4F74-B0E6-EB519BAB7AE5">
+          <dmn:text>&quot;NSAIDs (ibuprofen, naproxen)&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_5CED3A51-2594-4725-B0A2-540B6322C273">
+          <dmn:text>&quot;Increases cefuroxime levels slightly&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_CE719F2A-FCA0-4CB6-BAA6-E8C5576D6874">
+          <dmn:text>&quot;Mild toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2CE4943C-5F7B-4A8C-B857-7C506C3BB601">
+        <dmn:inputEntry id="_6B242ABC-A08D-4BB5-A17F-68B3E74768FE">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_98C5DA9B-512D-43D2-B318-84B7A2303F9A">
+          <dmn:text>&quot;Cefuroxime&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_9361D347-E528-4B31-A8FF-8F10BB82E7D5">
+          <dmn:text>&quot;Lithium&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_34B76A51-E9A3-4CB2-94FB-DA772A4F140A">
+          <dmn:text>&quot;Raises lithium levels&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_57F86D0C-CA3B-458D-8935-07CD968579E9">
+          <dmn:text>&quot;Lithium toxicity risk&quot;</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text></dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_9674AC14-6D66-4549-B98C-509B0ADA66FA" name="Drug Interaction Warnings">
+    <dmn:extensionElements />
+    <dmn:variable id="_76D49494-0348-4487-994C-ED6485C48DBC" name="Drug Interaction Warnings" typeRef="Any" />
+    <dmn:informationRequirement id="_00718DA5-C347-40BA-8BE8-D4ADB58506B1">
+      <dmn:requiredDecision href="#_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_8BFE2287-10F2-4B10-BE77-0FB87A9DDB34">
+      <dmn:requiredInput href="#_CFE809AA-CCA6-4B55-BC7F-2EF250633EF8" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_94485588-0480-479B-98E6-2E4D79ABAD1B">
+      <dmn:requiredDecision href="#_7A6BC865-0AD0-47BB-8813-FD2703251274" />
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_F8AE6823-3C09-43DA-979F-36CDD36EAB1A">
+      <dmn:text>(for conflict in Conflicting Medications return if list contains(split(Active Medications, &quot;,&quot;), conflict.Medication2) then {ConflictingDrug: conflict.Medication2, Interaction: conflict.Interaction, Risk: conflict.Risk} else null)[item != null]</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36" name="Treatment Recommendation">
+    <dmn:extensionElements />
+    <dmn:variable id="_AA228705-9B84-49F1-A97A-D2493F03C3E3" name="Treatment Recommendation" typeRef="Any" />
+    <dmn:informationRequirement id="_80B76745-B24F-4C33-8428-EA039650EF0F">
+      <dmn:requiredDecision href="#_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_9B22729A-341A-48AF-9D70-D31114FEFDED">
+      <dmn:requiredDecision href="#_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9" />
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_54176E97-58DA-48C4-97AF-A0EB94F6A052">
+      <dmn:requiredDecision href="#_9674AC14-6D66-4549-B98C-509B0ADA66FA" />
+    </dmn:informationRequirement>
+    <dmn:context id="_AF876502-7213-4571-92FB-0E7E609CEA87">
+      <dmn:contextEntry id="_287B98C9-A64E-4014-AF1A-36884689209A">
+        <dmn:variable id="_7DE078D6-31DF-4CCF-BC38-F4979FCF57C6" name="selectedMedication" typeRef="string" />
+        <dmn:literalExpression id="_890B77B7-4785-444C-89BB-B0CD59A62BF0">
+          <dmn:text>Medication</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry id="_32148788-B1B7-468E-B21A-BE5749B6B946">
+        <dmn:variable id="_431A6527-118E-4880-BC77-2EA323161344" name="selectedDosing" typeRef="string" />
+        <dmn:literalExpression id="_20644C4F-EB34-4661-B1C4-DB5C319D1577">
+          <dmn:text>Dosing</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry id="_4B3EB34A-BCC9-4DAB-8C4B-3EBDBC1638EC">
+        <dmn:variable id="_2D595937-016C-421E-B0FA-D6D43FA6F763" name="warnings" typeRef="Any" />
+        <dmn:literalExpression id="_B6CFB789-39E2-460D-9E0A-88E82EE69AB7">
+          <dmn:text>Drug Interaction Warnings</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry id="_0D242775-FD89-4B15-918B-1B34AE0C6523">
+        <dmn:literalExpression id="_EF1125D9-22C5-4061-919D-87B50C6AFC66">
+          <dmn:text>{Medication: selectedMedication, Dosing: selectedDosing, Warnings: warnings}</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:inputData id="_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" name="Age">
+    <dmn:extensionElements />
+    <dmn:variable id="_E59F37E1-E41E-41E9-B3D5-8B43CDEE9E17" name="Age" typeRef="number" />
+  </dmn:inputData>
+  <dmn:inputData id="_1AA2C0DE-962D-4EF9-A9E6-959CFCB09D0E" name="Weight">
+    <dmn:extensionElements />
+    <dmn:variable id="_95888E94-2C13-4379-89F4-DCB8F0C2A379" name="Weight" typeRef="number" />
+  </dmn:inputData>
+  <dmn:inputData id="_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" name="Creatinine Level">
+    <dmn:extensionElements />
+    <dmn:variable id="_9EB5FDBB-8E2F-4BB6-8921-D0E1109BB57F" name="Creatinine Level" typeRef="number" />
+  </dmn:inputData>
+  <dmn:inputData id="_65695F8B-25D4-4E75-BEA6-E0303856F04B" name="Is Penicillin Allergic">
+    <dmn:extensionElements />
+    <dmn:variable id="_6AA83082-4646-4061-8381-F12479FA56E2" name="Is Penicillin Allergic" typeRef="boolean" />
+  </dmn:inputData>
+  <dmn:inputData id="_CFE809AA-CCA6-4B55-BC7F-2EF250633EF8" name="Active Medications">
+    <dmn:extensionElements />
+    <dmn:variable id="_570BCF75-DDE8-49E7-87C9-DBD3F14BDA1F" name="Active Medications" typeRef="string" />
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_6BC66DD4-D83A-4934-9ED8-75425D249322" name="Default DRD" useAlternativeInputDataShape="false">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_F8AE6823-3C09-43DA-979F-36CDD36EAB1A">
+            <kie:width>1257</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DA5884B8-3B71-484F-97C3-8BDD8856CF11">
+            <kie:width>664</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape dmnElementRef="_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89" isCollapsed="false" id="dmnshape-_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89">
+        <dmndi:DMNStyle id="_CF426D5A-A4FB-4717-B0D2-8ACD10EDB755">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="316" y="598" width="170" height="62" />
+        <dmndi:DMNLabel id="_EA74BFE3-B647-47C9-93F5-921B69A434A3" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" isCollapsed="false" id="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46">
+        <dmndi:DMNStyle id="_BF0C50AD-712A-4AE6-8756-FE4E09BF8E06">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="712" y="598" width="154" height="62" />
+        <dmndi:DMNLabel id="_68063344-122B-424E-82CF-5A039E50D6A9" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9" isCollapsed="false" id="dmnshape-_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9">
+        <dmndi:DMNStyle id="_4BDAAE33-4DB8-4404-A8FD-FC9E5F64DD61">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="112" y="436" width="190" height="62" />
+        <dmndi:DMNLabel id="_342FE271-41FA-4EED-A0A4-4A4B560EF245" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_7A6BC865-0AD0-47BB-8813-FD2703251274" isCollapsed="false" id="dmnshape-_7A6BC865-0AD0-47BB-8813-FD2703251274">
+        <dmndi:DMNStyle id="_E7C56517-90EC-4B1E-AB52-1AE2AEFBDE1B">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="679" y="436" width="220" height="62" />
+        <dmndi:DMNLabel id="_05E4F5E8-478F-4C24-A2BF-028EA7658086" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_9674AC14-6D66-4549-B98C-509B0ADA66FA" isCollapsed="false" id="dmnshape-_9674AC14-6D66-4549-B98C-509B0ADA66FA">
+        <dmndi:DMNStyle id="_010D2954-AC5C-4DE0-9F38-F08986B4C311">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="689" y="274" width="200" height="62" />
+        <dmndi:DMNLabel id="_BC12C038-1F01-4C45-862E-6456825E2AAE" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36" isCollapsed="false" id="dmnshape-_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36">
+        <dmndi:DMNStyle id="_8022758E-3AC5-4DA0-B875-769FF39FAE69">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="568" y="112" width="200" height="62" />
+        <dmndi:DMNLabel id="_2175B63A-7090-4046-B127-6C590E09EFA2" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" isCollapsed="false" id="dmnshape-_37F196A0-C6F1-4F18-A712-8A0EA060EBF8">
+        <dmndi:DMNStyle id="_6F6DA926-AE11-467F-AFFA-FB773B5F002A">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="334" y="760" width="134" height="61" />
+        <dmndi:DMNLabel id="_1DFFF55A-D6BF-4F65-A9D9-70C6AC198C76" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_1AA2C0DE-962D-4EF9-A9E6-959CFCB09D0E" isCollapsed="false" id="dmnshape-_1AA2C0DE-962D-4EF9-A9E6-959CFCB09D0E">
+        <dmndi:DMNStyle id="_A4C802B5-44AF-4EEC-9A93-9FF1EA660124">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="528" y="760" width="134" height="61" />
+        <dmndi:DMNLabel id="_2DE59B38-532C-4E9B-80DC-691E77862B88" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" isCollapsed="false" id="dmnshape-_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6">
+        <dmndi:DMNStyle id="_DB2C7FCB-C0C1-4ED0-A6A0-DE6E94F013D3">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="140" y="760" width="134" height="61" />
+        <dmndi:DMNLabel id="_A0995A77-945D-404B-B601-9A5EC4516AC1" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_65695F8B-25D4-4E75-BEA6-E0303856F04B" isCollapsed="false" id="dmnshape-_65695F8B-25D4-4E75-BEA6-E0303856F04B">
+        <dmndi:DMNStyle id="_BE70D2FA-7BDC-451E-99A5-681715D9C8A2">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="722" y="760" width="134" height="61" />
+        <dmndi:DMNLabel id="_115D9ABF-71BE-46E3-BF6D-B821AECC8E9E" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="_CFE809AA-CCA6-4B55-BC7F-2EF250633EF8" isCollapsed="false" id="dmnshape-_CFE809AA-CCA6-4B55-BC7F-2EF250633EF8">
+        <dmndi:DMNStyle id="_414931BC-3E86-4A76-8CBC-85B3C0B7FF83">
+          <dmndi:FillColor red="255" green="255" blue="255" />
+          <dmndi:StrokeColor red="0" green="0" blue="0" />
+          <dmndi:FontColor red="0" green="0" blue="0" />
+        </dmndi:DMNStyle>
+        <dc:Bounds x="916" y="760" width="134" height="61" />
+        <dmndi:DMNLabel id="_A68C8DAE-013C-44C2-8B15-5BF8FCAB8716" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-_C263D11C-3FF6-4FFE-B89E-3F6BAE43D4AB" dmnElementRef="_C263D11C-3FF6-4FFE-B89E-3F6BAE43D4AB" sourceElement="dmnshape-_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" targetElement="dmnshape-_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89">
+        <di:waypoint x="401" y="760" />
+        <di:waypoint x="401" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_531CD5D7-EF43-4A46-8A78-3AC7CB1EEF3E" dmnElementRef="_531CD5D7-EF43-4A46-8A78-3AC7CB1EEF3E" sourceElement="dmnshape-_1AA2C0DE-962D-4EF9-A9E6-959CFCB09D0E" targetElement="dmnshape-_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89">
+        <di:waypoint x="595" y="760" />
+        <di:waypoint x="401" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_38A67614-097E-4284-ABE6-285CF81915CF" dmnElementRef="_38A67614-097E-4284-ABE6-285CF81915CF" sourceElement="dmnshape-_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" targetElement="dmnshape-_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89">
+        <di:waypoint x="207" y="760" />
+        <di:waypoint x="401" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_A3EC2FC1-8C7B-44D8-A971-E96F6158D251" dmnElementRef="_A3EC2FC1-8C7B-44D8-A971-E96F6158D251" sourceElement="dmnshape-_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" targetElement="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46">
+        <di:waypoint x="401" y="760" />
+        <di:waypoint x="789" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_4286A113-B12E-42E8-B053-43ECE3F7F26A" dmnElementRef="_4286A113-B12E-42E8-B053-43ECE3F7F26A" sourceElement="dmnshape-_65695F8B-25D4-4E75-BEA6-E0303856F04B" targetElement="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46">
+        <di:waypoint x="789" y="760" />
+        <di:waypoint x="789" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_E2499A09-06BC-4300-A5B1-78ED11A228F4" dmnElementRef="_E2499A09-06BC-4300-A5B1-78ED11A228F4" sourceElement="dmnshape-_37F196A0-C6F1-4F18-A712-8A0EA060EBF8" targetElement="dmnshape-_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9">
+        <di:waypoint x="401" y="760" />
+        <di:waypoint x="207" y="498" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_92617A03-D70B-4441-AAFB-C4FB743C6640" dmnElementRef="_92617A03-D70B-4441-AAFB-C4FB743C6640" sourceElement="dmnshape-_3D4D091B-6E2F-4BEE-9D46-21EB37176EE6" targetElement="dmnshape-_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9">
+        <di:waypoint x="207" y="760" />
+        <di:waypoint x="207" y="498" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_8895F11E-C8D5-407E-8977-D3F81720E296" dmnElementRef="_8895F11E-C8D5-407E-8977-D3F81720E296" sourceElement="dmnshape-_0F04BA40-3A8F-4DFA-851E-7A02E09A1F89" targetElement="dmnshape-_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9">
+        <di:waypoint x="401" y="598" />
+        <di:waypoint x="207" y="498" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_22004E9E-26E2-442C-B41F-B8E7393DE93A" dmnElementRef="_22004E9E-26E2-442C-B41F-B8E7393DE93A" sourceElement="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" targetElement="dmnshape-_7A6BC865-0AD0-47BB-8813-FD2703251274">
+        <di:waypoint x="789" y="598" />
+        <di:waypoint x="789" y="498" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_00718DA5-C347-40BA-8BE8-D4ADB58506B1" dmnElementRef="_00718DA5-C347-40BA-8BE8-D4ADB58506B1" sourceElement="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" targetElement="dmnshape-_9674AC14-6D66-4549-B98C-509B0ADA66FA">
+        <di:waypoint x="789" y="598" />
+        <di:waypoint x="789" y="336" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_8BFE2287-10F2-4B10-BE77-0FB87A9DDB34" dmnElementRef="_8BFE2287-10F2-4B10-BE77-0FB87A9DDB34" sourceElement="dmnshape-_CFE809AA-CCA6-4B55-BC7F-2EF250633EF8" targetElement="dmnshape-_9674AC14-6D66-4549-B98C-509B0ADA66FA">
+        <di:waypoint x="983" y="760" />
+        <di:waypoint x="789" y="336" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_94485588-0480-479B-98E6-2E4D79ABAD1B" dmnElementRef="_94485588-0480-479B-98E6-2E4D79ABAD1B" sourceElement="dmnshape-_7A6BC865-0AD0-47BB-8813-FD2703251274" targetElement="dmnshape-_9674AC14-6D66-4549-B98C-509B0ADA66FA">
+        <di:waypoint x="789" y="436" />
+        <di:waypoint x="789" y="336" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_80B76745-B24F-4C33-8428-EA039650EF0F" dmnElementRef="_80B76745-B24F-4C33-8428-EA039650EF0F" sourceElement="dmnshape-_66B7E093-4C1B-4446-8F1C-326BEFDA3C46" targetElement="dmnshape-_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36">
+        <di:waypoint x="789" y="598" />
+        <di:waypoint x="668" y="174" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_9B22729A-341A-48AF-9D70-D31114FEFDED" dmnElementRef="_9B22729A-341A-48AF-9D70-D31114FEFDED" sourceElement="dmnshape-_8CA5AFC8-0EB0-44F4-9D85-B81F6C203FC9" targetElement="dmnshape-_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36">
+        <di:waypoint x="207" y="436" />
+        <di:waypoint x="668" y="174" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_54176E97-58DA-48C4-97AF-A0EB94F6A052" dmnElementRef="_54176E97-58DA-48C4-97AF-A0EB94F6A052" sourceElement="dmnshape-_9674AC14-6D66-4549-B98C-509B0ADA66FA" targetElement="dmnshape-_FFD4B910-BBC3-4FA7-A3DD-4D1C51A2FC36">
+        <di:waypoint x="789" y="274" />
+        <di:waypoint x="668" y="174" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
